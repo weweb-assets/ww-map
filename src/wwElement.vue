@@ -242,6 +242,10 @@ export default {
             }
             this.map.fitBounds(mapBounds);
         },
+        simulateEvent() {
+            if (!this.markers.length) throw new Error('No marker available to simulate the event');
+            return this.markers[0];
+        },
     },
 };
 </script>
