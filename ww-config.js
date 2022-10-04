@@ -227,51 +227,33 @@ export default {
         nameField: {
             hidden: (content, sidepanelContent, boundProps) => !boundProps.markers || !content.markers,
             label: {
-                en: 'Marker name field',
-                fr: 'Marker name field',
+                en: 'Marker name',
+                fr: 'Marker name',
             },
-            type: 'ObjectPropertyPath',
-            options: content => {
-                if (!content.markers.length || typeof content.markers[0] !== 'object') {
-                    return null;
-                }
-
-                return { object: content.markers[0] };
-            },
+            type: 'Formula',
+            options: content => ({ template: content.markers.length ? content.markers[0] : null }),
             defaultValue: null,
             section: 'settings',
         },
         latField: {
             hidden: (content, sidepanelContent, boundProps) => !boundProps.markers || !content.markers,
             label: {
-                en: 'Marker lat. field',
-                fr: 'Marker lat. field',
+                en: 'Marker lat.',
+                fr: 'Marker lat.',
             },
-            type: 'ObjectPropertyPath',
-            options: content => {
-                if (!content.markers.length || typeof content.markers[0] !== 'object') {
-                    return null;
-                }
-
-                return { object: content.markers[0] };
-            },
+            type: 'Formula',
+            options: content => ({ template: content.markers.length ? content.markers[0] : null }),
             defaultValue: null,
             section: 'settings',
         },
         lngField: {
             hidden: (content, sidepanelContent, boundProps) => !boundProps.markers || !content.markers,
             label: {
-                en: 'Marker long. field',
-                fr: 'Marker long. field',
+                en: 'Marker long.',
+                fr: 'Marker long.',
             },
-            type: 'ObjectPropertyPath',
-            options: content => {
-                if (!content.markers.length || typeof content.markers[0] !== 'object') {
-                    return null;
-                }
-
-                return { object: content.markers[0] };
-            },
+            type: 'Formula',
+            options: content => ({ template: content.markers.length ? content.markers[0] : null }),
             defaultValue: null,
             section: 'settings',
         },

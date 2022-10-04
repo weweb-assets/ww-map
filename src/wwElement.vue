@@ -21,10 +21,6 @@
 import { Loader } from './googleLoader';
 import stylesConfig from './stylesConfig.json';
 
-const DEFAULT_MARKER_NAME_FIELD = 'name';
-const DEFAULT_MARKER_LAT_FIELD = 'lat';
-const DEFAULT_MARKER_LNG_FIELD = 'lng';
-
 export default {
     props: {
         /* wwEditor:start */
@@ -36,7 +32,8 @@ export default {
     emits: ['trigger-event', 'update:content:effect'],
     setup() {
         const markerInstances = [];
-        return { markerInstances };
+        const { resolveMappingFormula } = wwLib.wwFormula.useFormula();
+        return { markerInstances, resolveMappingFormula };
     },
     data() {
         return {
@@ -87,17 +84,13 @@ export default {
             };
         },
         markers() {
-            const nameField = this.content.nameField || DEFAULT_MARKER_NAME_FIELD;
-            const latField = this.content.latField || DEFAULT_MARKER_LAT_FIELD;
-            const lngField = this.content.lngField || DEFAULT_MARKER_LNG_FIELD;
-
             if (!Array.isArray(this.content.markers)) return [];
 
             return this.content.markers.map(marker => ({
-                content: wwLib.resolveObjectPropertyPath(marker, nameField),
+                content: this.resolveMappingFormula(this.content.nameField, marker, marker.name || ''),
                 position: {
-                    lat: parseFloat(wwLib.resolveObjectPropertyPath(marker, latField) || 0),
-                    lng: parseFloat(wwLib.resolveObjectPropertyPath(marker, lngField) || 0),
+                    lat: parseFloat(this.resolveMappingFormula(this.content.latField, marker, marker.lat || 0)),
+                    lng: parseFloat(this.resolveMappingFormula(this.content.lngField, marker, marker.lng || 0)),
                 },
                 rawData: marker,
             }));
