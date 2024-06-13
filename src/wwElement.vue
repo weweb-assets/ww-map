@@ -228,40 +228,47 @@ export default {
                         this.content.defaultMarkerUrl && this.content.defaultMarkerUrl.startsWith('designs/')
                             ? `${wwLib.wwUtils.getCdnPrefix()}${this.content.defaultMarkerUrl}`
                             : this.content.defaultMarkerUrl;
-                    let _marker = new google.maps.Marker({
-                        position: marker.position,
-                        map: this.map,
-                        icon: this.content.markersIcon
-                            ? url
-                                ? {
-                                      url,
-                                      scaledSize:
-                                          !this.content.markersAutoSize && marker.width && marker.height
-                                              ? new google.maps.Size(marker.width, marker.height)
-                                              : !this.content.markersAutoSize &&
-                                                this.content.defaultMarkerWidth &&
-                                                this.content.defaultMarkerHeight
-                                              ? new google.maps.Size(
-                                                    this.content.defaultMarkerWidth,
-                                                    this.content.defaultMarkerHeight
-                                                )
-                                              : undefined,
-                                  }
-                                : {
-                                      url: defaultMarkerUrl,
-                                      scaledSize:
-                                          !this.content.markersAutoSize &&
+                    let icon;
+                    if (this.content.markersIcon) {
+                        if (url) {
+                            icon = {
+                                url,
+                                scaledSize:
+                                    !this.content.markersAutoSize && marker.width && marker.height
+                                        ? new google.maps.Size(marker.width, marker.height)
+                                        : !this.content.markersAutoSize &&
                                           this.content.defaultMarkerWidth &&
                                           this.content.defaultMarkerHeight
-                                              ? new google.maps.Size(
-                                                    this.content.defaultMarkerWidth,
-                                                    this.content.defaultMarkerHeight
-                                                )
-                                              : undefined,
-                                  }
-                            : {},
+                                        ? new google.maps.Size(
+                                              this.content.defaultMarkerWidth,
+                                              this.content.defaultMarkerHeight
+                                          )
+                                        : undefined,
+                            };
+                        } else {
+                            icon = {
+                                url: defaultMarkerUrl,
+                                scaledSize:
+                                    !this.content.markersAutoSize &&
+                                    this.content.defaultMarkerWidth &&
+                                    this.content.defaultMarkerHeight
+                                        ? new google.maps.Size(
+                                              this.content.defaultMarkerWidth,
+                                              this.content.defaultMarkerHeight
+                                          )
+                                        : undefined,
+                            };
+                        }
+                    }
+                    const markerData = {
+                        position: marker.position,
+                        map: this.map,
                         animation: google.maps.Animation.DROP,
-                    });
+                    };
+                    if (icon) {
+                        markerData.icon = icon;
+                    }
+                    let _marker = new google.maps.Marker(markerData);
 
                     this.markerInstances.push(_marker);
                     if (marker.content) {
