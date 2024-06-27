@@ -100,15 +100,15 @@ export default {
             if (!Array.isArray(this.content.markers)) return [];
 
             return this.content.markers.map(marker => ({
-                content: wwLib.resolveObjectPropertyPath(marker, nameField),
+                content: wwLib.wwUtils.resolveObjectPropertyPath(marker, nameField),
                 position: {
-                    lat: parseFloat(wwLib.resolveObjectPropertyPath(marker, latField) || 0),
-                    lng: parseFloat(wwLib.resolveObjectPropertyPath(marker, lngField) || 0),
+                    lat: parseFloat(wwLib.wwUtils.resolveObjectPropertyPath(marker, latField) || 0),
+                    lng: parseFloat(wwLib.wwUtils.resolveObjectPropertyPath(marker, lngField) || 0),
                 },
                 rawData: marker,
-                url: wwLib.resolveObjectPropertyPath(marker, urlField),
-                width: parseInt(wwLib.resolveObjectPropertyPath(marker, widthField) || 0),
-                height: parseInt(wwLib.resolveObjectPropertyPath(marker, heightField) || 0),
+                url: wwLib.wwUtils.resolveObjectPropertyPath(marker, urlField),
+                width: parseInt(wwLib.wwUtils.resolveObjectPropertyPath(marker, widthField) || 0),
+                height: parseInt(wwLib.wwUtils.resolveObjectPropertyPath(marker, heightField) || 0),
             }));
         },
     },
