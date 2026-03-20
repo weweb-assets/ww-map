@@ -64,6 +64,7 @@ export default {
                 },
             },
             default: true,
+            description: "Run when the map is clicked.",
         },
         {
             name: 'marker:mouseover',
@@ -80,6 +81,7 @@ export default {
                 domEvent: { x: 128, y: 156, target: null },
             },
             getTestEvent: 'getMarkerTestEvent',
+            description: "Run when the mouse enters a marker.",
         },
         {
             name: 'marker:mouseout',
@@ -96,6 +98,7 @@ export default {
                 domEvent: { x: 128, y: 156, target: null },
             },
             getTestEvent: 'getMarkerTestEvent',
+            description: "Run when the mouse leaves a marker.",
         },
         {
             name: 'marker:click',
@@ -112,6 +115,7 @@ export default {
                 domEvent: { x: 128, y: 156, target: null },
             },
             getTestEvent: 'getMarkerTestEvent',
+            description: "Run when a marker is clicked.",
         },
     ],
     properties: {
